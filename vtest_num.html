@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocabulary test for number</title>
+
+    <style type="text/css">
+    html, body{
+        width: 100%;
+        height: 100%;
+        background-color: #F4F4F4;
+    }
+
+    #root {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 100%;
+        width: 90%;
+    }
+
+    #en, #zh {
+        width: 100%;
+        margin: 10px;
+        text-align: center;
+    }
+
+    #en {
+        position: absolute;
+        bottom: 50%;
+        font-size: 500%;
+        color: #339933;
+    }
+
+    #zh {
+        position: absolute;
+        top: 50%;
+        font-size: 300%;
+        color: #339933;
+    }
+    </style>
+</head>
+
+<body>
+<div id = "root">   
+    <div id = "en"></div>
+    <br/><br/>
+    <div id = "zh"></div>
+</div>
+
+<script>
+var data, idx, type, recalling;
+window.onload = function() {
+    var text = document.getElementById('data').innerHTML;
+    var textlines = text.split('\n').filter(function(val) {return val!=='';});
+    data = textlines.map(function(val) {return val.split(';');});
+    recalling = false;
+    if(data.length>0) {
+        ask();
+        window.addEventListener("click", update, false);
+        window.addEventListener("keypress", function(evt) {
+            if (evt.keyCode == 32 /* space bar */) {
+              update();
+            }
+        }, false);
+    } else {
+        document.getElementById('en').innerHTML = 'Sorry, there\'s no data!';
+        document.getElementById('zh').innerHTML = '对不起，没有数据！';
+    }
+};
+
+function ask() {
+    while(true) {
+        var new_idx = Math.floor(Math.random()*data.length);
+        if(idx!==new_idx || data.length==1) {
+            idx = new_idx;
+            break;
+        }
+    }
+    type = Math.floor(Math.random()*2);
+    if(type===0) {
+        document.getElementById('en').innerHTML = data[idx][0];
+        document.getElementById('zh').innerHTML = '';
+    } else {
+        document.getElementById('en').innerHTML = '';
+        document.getElementById('zh').innerHTML = data[idx][1];
+    }
+    recalling = true;
+};
+
+function answer() {
+    document.getElementById('en').innerHTML = data[idx][0];
+    document.getElementById('zh').innerHTML = data[idx][1];
+    recalling = false;
+};
+
+function update() {
+    if(recalling) {
+        answer();
+    } else {
+        ask();
+    }
+};
+</script>
+
+<script id="data" type="text/template">
+one;一
+two;二
+three;三
+four;四
+five;五
+six;六
+seven;七
+eight;八
+nine;九
+ten;十
+</script>
+
+</body>
+</html>

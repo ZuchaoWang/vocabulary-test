@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocabulary test for pediatrics</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="user-scalable=0;"> 
+    <style type="text/css" charset="utf-8">
+    html, body{
+        width: 100%;
+        height: 100%;
+        background-color: #F4F4F4;
+    }
+
+    #root {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 100%;
+        width: 90%;
+    }
+
+    #en, #zh {
+        width: 100%;
+        margin: 10px;
+        text-align: center;
+    }
+
+    #en {
+        position: absolute;
+        bottom: 50%;
+        font-size: 500%;
+        color: #339933;
+    }
+
+    #zh {
+        position: absolute;
+        top: 50%;
+        font-size: 300%;
+        color: #339933;
+    }
+    </style>
+</head>
+
+<body>
+<div id = "root">   
+    <div id = "en"></div>
+    <br/><br/>
+    <div id = "zh"></div>
+</div>
+
+<script>
+var data, idx, type, recalling;
+window.onload = function() {
+    var ua = navigator.userAgent;
+    var interaction = (ua.match(/iPad/i)) ? "touchstart" : "click";
+
+    var text = document.getElementById('data').innerHTML;
+    var textlines = text.split('\n').filter(function(val) {return val!=='';});
+    data = textlines.map(function(val) {return val.split(';');});
+    recalling = false;
+    if(data.length>0) {
+        ask();
+        window.addEventListener(interaction, update, false);
+        window.addEventListener("keypress", function(evt) {
+            if (evt.keyCode == 32 /* space bar */) {
+              update();
+            }
+        }, false);
+    } else {
+        document.getElementById('en').innerHTML = 'Sorry, there\'s no data!';
+        document.getElementById('zh').innerHTML = '对不起，没有数据！';
+    }
+};
+
+function ask() {
+    while(true) {
+        var new_idx = Math.floor(Math.random()*data.length);
+        if(idx!==new_idx || data.length==1) {
+            idx = new_idx;
+            break;
+        }
+    }
+    type = Math.floor(Math.random()*2);
+    if(type===0) {
+        document.getElementById('en').innerHTML = data[idx][0];
+        document.getElementById('zh').innerHTML = '';
+    } else {
+        document.getElementById('en').innerHTML = '';
+        document.getElementById('zh').innerHTML = data[idx][1];
+    }
+    recalling = true;
+};
+
+function answer() {
+    document.getElementById('en').innerHTML = data[idx][0];
+    document.getElementById('zh').innerHTML = data[idx][1];
+    recalling = false;
+};
+
+function update() {
+    if(recalling) {
+        answer();
+    } else {
+        ask();
+    }
+};
+</script>
+
+<script id="data" type="text/template">
+11β-羟化酶缺乏症;11β-hydroxylase deficiency (11β-OHD)
+17α-羟化酶缺乏症;17α-hydroxylase deficiency (17α-OHD)
+21-羟化酶缺乏症;21-hydroxylase deficiency (21-OHD)
+3β-羟类固醇脱氢酶缺乏症;3β-hydroxysteroid dehydrogenase deficiency (3β-HSD)
+巴宾斯基征;Babinski's sign
+白血病;leukemia
+败血症;septicemia
+膀胱输尿管反流;vesicoureteral reflux (VUR)
+膀胱炎;cystitis
+苯丙酮尿症;phenlketonuria (PKU)
+病毒性心肌炎;viral myocarditis
+病毒性脑炎;viral encephalitis
+病理性黄疸;pathologic jaundice
+伴中央颞区棘波的儿童良性癫痫;benign childhood epilepsy with centrotemporal spikes
+C-反应蛋白;C -reactive protein (CRP)
+产毒性大肠杆菌;enterotoxigenic E .coli (ETEC)
+肠病性肢端皮炎;acrodermatitis enteropathica
+肠肝循环;enterohepatic circulation
+肠套叠;intussusception
+常频机械通气;conventional mechanical ventilation (CMV)
+常染色体;autosome
+常染色体显性基因;autosome dominant inheritance
+常染色体隐性基因;autosome recessive inheritance
+持续气道正压;continuous positive airway pressure (CPAP)
+持续胎儿循环;persistent fetal circulation (PFC)
+充血性心力衰竭;congestive heart failure
+出血性大肠杆菌;enterohemorrhagic E .coli (EGEC)
+川崎病;Kawasaki disease (KD)
+传染性单核细胞增多症;infectious mononucleosis (IM)
+传染性非典型肺炎;infectious atypical pneumonia
+磁共振成像;magnetic resonance imaging (MRI)
+刺激腺垂体分泌促性腺激素;gonadotropin hormone (Gn)
+大发作;grand mal
+大于胎龄儿;large for gestational age (LGA)
+单基因遗传病;single gene diseases
+胆红素脑病;bilirubin encephalopathy
+蛋白质-能量营养不良;protein-energy malnutrition (PEM)
+低出生体重;low birth weight (LBW)
+低氧性呼吸衰竭;hypoxemic respiratory failure ()
+地方性先天性甲低;endemic congenital hypothyroidism
+癫痫;epilepsy
+癫痫持续状态;status epilepicus (SE)
+电子计算机断层扫描;computed tomography (CT)
+动脉导管未闭;patent ductus arteriosus
+多基因遗传病;multifactorial diseases
+多器官功能衰竭;multiple organ failure (MOF)
+EB病毒;Epstein-Barr virus (EBV)
+鹅口疮;thrush ,oral candidiasis
+儿童疾病综合管理;integrated management of childhood illness (IMCI)
+儿童失神癫痫;childhood absence epilepsy
+房间隔缺损;atrial septal defect
+房室传导阻滞;AV block
+非胰岛素依赖性糖尿病;noninsulin-dependent diabetes mellitus (NIDDM)
+非甾体类抗炎药;non-steroidal anti-inflammatory drugs (NSAIDs)
+肥胖;obesity
+肺表面活性物质;pulmonary surfactant (PS)
+肺大泡;pneumatocele
+肺动脉瓣狭窄;pulmonary stenosis (PS)
+肺曲霉菌病;pulmonary aspergillosis
+肺透明膜病;hyaline membrane disease (HMD)
+肺炎;pneumonia
+肺炎支原体肺炎;mycoplasma pneumoniae pneumonia
+风湿热;rheumatic fever
+风湿性疾病;rheumatic diseases
+佛斯特征;Chvostek's sign
+复温;rewarming
+腹泻病;diarrhea
+肝豆状核变性;hepatolenticular degeneration (HLD)
+感染性肺炎;infectious pneumonia
+感染性心内膜炎;infectious endocarditis
+感染性休克;septic shock
+高级生命支持;advanced life support
+高价乙肝免疫球蛋白;HBIg
+高碳酸血症性呼吸衰竭;hypercapnia respiratory failure
+高危儿;high risk infant
+高氧-高通气试验;hyperoxic hyperventilation test
+高氧试验;hyperoxia test
+革兰阴性杆菌肺炎;Gram-negative bacillary pneumonia (GNBP)
+弓形虫病;toxoplasmosis
+宫内生长迟缓;intrauterine growth restriction /retardation (IUGR)
+钩虫病;ancylostomiasis
+孤立性蛋白尿;isolated proteinuria
+孤立性血尿;isolated hematuria
+骨嗜酸细胞肉芽肿;eosinophilic granuloma of bone (EGB)
+冠状病毒;coronavirus
+光照疗法;phototherapy
+过敏性紫癜;anaphylactoid purpura
+过期产儿;post-term infant
+H2受体拮抗剂;H2-receptor blockers
+韩-薛-柯病;Hand-Schuller-Chrustian disease (HSC)
+红细胞葡萄糖-6-磷酸脱氢酶;G-6-PD
+红细胞游离原卟啉;free erythrocyte protoporphyin (FEP)
+呼吸道合胞病毒;RSV
+呼吸道合胞病毒肺炎;respiratory syncytial virus pneumonia
+呼吸衰竭;respiratory failure
+呼吸暂停;apnea
+化脓性脑膜炎;purulent meningitis
+换血疗法;exchange transfusion
+黄体生成素;luteinizing hormone (LH)
+获得性免疫缺陷综合征;acquired immunodeficiency syndrome (AIDS)
+肌电图;EMG
+基本生命支持;basic life support
+基础代谢率;BMR
+基因组印记;genomic imprinting
+激素;hormone
+吉兰-巴雷综合症;Guillain-Barre syndrome (GBS)
+急性肺组织胞浆菌病;acute pulmonary histoplasmosis
+急性感染性喉炎;acute infectious laryngitis
+急性呼吸窘迫综合症;acute respiratory distress syndrome (ARDS)
+急性淋巴细胞白血病;ALL
+急性气管支气管炎;acute tracheobronchitis
+急性上呼吸道感染;acute upper respiratory infection (AURI)
+急性肾衰竭;acute renal failure (ARF)
+急性肾小球肾炎;acute glomerulonephritis
+急性粟粒性肺结核;acute miliary tuberculosis of the lungs
+急性支气管炎;acute bronchitis
+脊髓灰质炎;poliomyelitis
+继发性呼吸暂停;secondary apnea
+继发性免疫缺陷病;secondary immunodeficiency (SID)
+继发性肾小球疾病;secondary glomerular diseases
+寄生虫病;parasitic disease
+家族性再发性血尿;familial recurrent hematuria
+甲状腺功能减低症;hypothyroidism
+甲状腺激素;thyroid hormone
+焦虑症;anxiety disorder
+结核病;tuberculosis
+结核性脑膜炎;tuberculous meningitis
+金黄色葡萄球菌肺炎;staphylococcal aureus pneumonia
+近端肾小管酸中毒 ;proximal renal tubular acidosis (pRTA)
+惊厥;convulsion
+巨大儿;macrosomia
+巨噬细胞活化综合征;macrophage activation syndrome (MAS)
+巨细胞病毒感染;cytomegalovirus infection
+抗利尿激素;antidiuretic hormone (ADH)
+抗利尿激素异常分泌综合征;syndrome of inappropriate secretion of antidiuretic hormone (SIADH)
+抗生素相关性腹泻;antibiotic-associated diarrhea (AAD)
+咳嗽变异型哮喘;CVA
+克氏征;Kernig‘s sign
+空肠弯曲菌;campylobacter jejuni
+口服补液盐;oral rehydration salts (ORS)
+口炎;stomatitis
+Lennox-Gastaut综合征;LGS
+朗格汉斯细胞组织细胞增多症;Langerhans cell histiocytosis (LCH)
+狼疮性肾炎;lupus nephritis
+勒-雪病;Letterer-Siwe disease (LS)
+联合免疫缺陷病;combined immunodeficiency (CID)
+流行性腮腺炎;mumps ,epidemic parotitis
+卵泡刺激素;follicle stimulating hormone (FSH)
+轮状病毒;rotavirus
+麻疹;measles
+麻疹粘膜斑;Koplik's spot
+慢性肺疾病;chronic lung disease (CLD)
+毛玻璃样;ground glass
+毛细支气管炎;bronchiolitis
+弥散性血管内凝血;disseminated intravascular coagulation (DIC)
+觅食反射;rooting reflex
+泌尿道感染;urinary tract infection (UTI)
+免疫;immunity
+免疫功能低下;immuno-compromise
+免疫缺陷病;immunodeficiency (ID)
+蛲虫病;enterobiasis
+脑电图;electroencephalography (EEG)
+脑干听觉诱发电位;BAEP
+脑脊液;cerebral spinal fluid (CSF)
+脑实质出血;intraparenchymal haemorrhage (IPH)
+脑室周围-脑室内出血;periventricular-intraventricular haemorrhage (PVH-IVH)
+脑性瘫痪;cerebral palsy
+黏多糖病;mucopolysaccharidosis (MPS)
+黏膜皮肤淋巴结综合征;mucocutaneous lymphnode syndrome (MCLS)
+念珠菌病;candidiasis ()
+尿崩症;diabetes insipidus (DI)
+尿道炎;urethritis
+脓气胸;pyopneumothorax
+脓胸;empyema
+疱疹性口腔炎;herpetic stomatitis
+疱疹性咽峡炎;herpangina
+期前收缩;premature beat
+脐炎;omphalitis
+气道高反应性;airway hyperresponsiveness (AHR)
+潜伏结核感染;latent tuberculosis infection
+桥本甲状腺炎;Hashimoto thyroiditis
+侵袭性大肠杆菌;enteroinvasive E.coli (EIEC)
+青春期;adolescence ,puberty
+青年成熟期发病型糖尿病;maturity-onset diabetes of youth (MODY)
+曲霉菌病;aspergillosis
+全面性癫痫伴热性惊厥附加症;generalized epilepsies with febrile seizures plus (GEFS+)
+全身炎症反应综合征;systemic inflammatory response syndrome (SIRS)
+缺铁性贫血;iron deficiency anemia (IDA)
+Reye综合征;Reye syndrome
+染色体病;chromosomal disorders
+热性惊厥;febrile seizure (FS)
+人类免疫缺陷病毒;human immunodeficiency virus (HIV)
+人类偏肺病毒;hunan meta-pneumovirus (hMPV)
+散发性先天性甲低;sporadic congenital hypothyroidism
+沙门菌;salmonella
+伤害;injury
+深部真菌病;deep mycosis
+神经性贪食症;bulimia nervosa
+神经性厌食症;anorexia nervosa
+神经元特异性烯醇化酶;neuron-specific enolase (NSE)
+肾病综合症;nephrotic syndrome (NS)
+肾小管酸中毒;renal tubular acidosis (RTA)
+肾小球滤过率;GFR
+肾小球肾炎;glomerulonephritis
+肾盂肾炎;pyelonephritis
+生长迟缓;stunting
+生长激素;GH
+生长激素缺陷症;growth hormone deficieney (GHD)
+生长激素释放激素;GHRH
+生长激素释放抑制激素;somatostatin (SRIH /GHIH)
+生理性黄疸;physiologic jaundice
+湿肺;wet lung
+视觉诱发电位;VEP
+适于胎龄;appropriate for gestational age (AGA)
+室间隔缺损;ventricular septal defect
+室性期前收缩;ventricular premature beat
+室性心动过速;ventricular tachycardia
+水痘;chickenpox ,varicella
+水痘-带状疱疹病毒;varicella-zoster virus (VZV)
+胎粪吸入综合征;meconium aspiration syndrome (MAS)
+糖尿病;diabetes mellitus (DM)
+糖原累积病;glycogen storage disease (GSD)
+绦虫病;taeniasis
+特发性矮身材;idiopathic short stature (ISS)
+特发性性早熟;idiopathic precocious puberty ()
+特发性血小板减少性紫癜;idiopathic thrombocytopenic purpura (ITP)
+体感诱发电位;SEP
+头颅血肿;cephalhematoma
+外周性性早熟;peripheral precocious puberty
+完全性大动脉转位;complete transposition of the great arteries (c-TGA)
+晚期新生儿;late newborn
+围生期;perinatal period
+维生素A缺乏病;vitamin A deficiency disorder
+维生素D缺乏性手足抽搐症 ;tetany of vitamin D deficiency
+未成熟儿;preterm infant ;premature infant
+未结合胆红素;unconjugated bilirubin
+胃食管反流;gastroesophageal reflux (GER)
+胃炎;gastritis
+握持反射;grasp reflex
+无症状性菌尿;asymptomatic bacteriuria
+物质滥用;substance abuse
+X连锁显性遗传;X-linked dominant inheritance
+X连锁隐性遗传;X-linked recessive inheritance
+吸吮反射;sucking reflex
+促性腺激素释放激素;gonadotropin releasing hormone (GnRH)
+先天性肥厚性幽门狭窄;congenital hypertrophic pyloric stenosis
+先天性睾丸发育不全综合征;Klinefelter syndrome
+先天性甲状腺功能减低症;congenital hypothyroidism
+先天性巨结肠;congenital megacolon
+先天性梅毒;congenital syphilis
+先天性肾病综合症;congenital nephrotic syndrome
+先天性肾上腺皮质增生症;congenital adrenal hyperplasia (CAH)
+先天性心脏病;congenital heart disease (CHD)
+线粒体病;mitochondrial diseases
+腺病毒肺炎;adenovirus pneumonia
+消化性溃疡;peptic ulcer
+小儿急性中毒;acute poisoning
+小脑出血;cerebellar hemorrhage (CH)
+小于胎龄;small for gestational age (SGA)
+哮喘持续状态;status asthmaticus
+心肺复苏;cardiopulmonary resuscitation (CPR)
+心理社会发育障碍;disturbed psychosocial development
+心律失常;cardiac arrhythmia
+心内膜弹力纤维增生症;endocardial fibroelastosisi
+心内膜炎;endocarditis
+新生儿;neonate ,newborn
+新生儿败血症;neonatal septicemia
+新生儿持续肺动脉高压;persistent pulmonary hypertension of newborn (PPHN)
+新生儿出血症;hemorrhagic disease of the newborn
+新生儿低钙血症;neonatal hypocalcemia
+新生儿低血糖;neonatal hypoglycemia
+新生儿高血糖;neonatal hyperglycemia
+新生儿寒冷损伤综合征;neonatal cold injury syndrome
+新生儿呼吸窘迫综合症;respiratory distress syndrome (RDS)
+新生儿坏死性小肠结肠炎;neonatal necrotizing enterocolitis (NEC)
+新生儿黄疸;neonatal jaundice
+新生儿颅内出血;intracranial haemorrhage of the newborn
+新生儿破伤风;neonatal tetanus
+新生儿缺氧缺血性脑病;hypoxic-ischemic encephalopathy (HIE)
+新生儿溶血病;hemolytic disease of newborn (HDN)
+新生儿衣原体感染;chlamydial infection
+新生儿硬肿症;sclerema neonatorum
+新生儿窒息;asphyxia of newborn
+新生儿重症监护室;neonatal intensive care unit (NICU)
+性染色体;sex chromosome
+性早熟;sexual precocity
+血管内皮细胞;endothelium of blood vessels
+血浆鱼精蛋白副凝试验;plasma protamine paracoagulation (3P试验)
+血尿;hematuria
+血清肌酸磷酸激酶同工酶;creatine kinase
+血清嗜异凝集试验;heterophil agglutination test (HAT)
+血清铁;serum iron (SI)
+血清铁蛋白;serum ferritin (SF)
+血清总铁结合力;total iron binding capacity (TIBC)
+血友病;hemophilia
+Y连锁遗传;Y-linked inheritance
+咽结合膜热;pharyngo-conjunctival fever
+严重急性呼吸道综合征;severe acute respiratory syndrome (SARS)
+氧疗;oxygen therapy
+衣原体肺炎;chlamydial pneumonia
+胰岛素依赖性糖尿病;insulin dependent diabetes mellitus (IDDM)
+遗传病;genetic disease
+遗传性代谢病;inborn errors of metabolism (IEM)
+遗传性球形红细胞增多症;hereditary spherocytosis (HS)
+遗传性肾小球疾病;hereditary glomerular diseases
+遗传性生长激素缺乏;HGHD
+乙肝病毒相关性肾炎;HBV-associated glomerulonephritis
+抑郁症;depression
+阴离子间隙;anion gap (AG)
+隐球菌病;cryptococcosis
+隐球菌脑膜炎;cryptococcal meningitis
+婴儿肝炎综合症;infantile hepatitis syndrome
+婴儿痉挛;infantile spasm
+营养;nutrition
+营养素;nutrients
+营养性巨幼细胞贫血;nutritional megaloblastic anemia
+营养性维生素D缺乏佝偻病;rickets of vitamin D deficiency
+硬膜下出血;subdural hemorrhage (SDH)
+拥抱反射;Moro reflex
+幽门螺杆菌;helicobater pylori (Hp)
+幼年特发性关节炎;juvenile idiopathic arthritis (JIA)
+原发型肺结核;primary pulmonary tuberculosis
+原发性呼吸暂停;primary apnea
+原发性免疫缺陷病;primary immunodeficiency (PID)
+原发性肾小球疾病;primary glomerular diseases
+原发性蛛网膜下腔出血;primary subarachoid haemorrhage (SAH)
+原发综合症;primary complex
+远端肾小管酸中毒;distal renal tubular acidosis (dRTA)
+早产儿;preterm infant
+早产儿视网膜病;retinopathy of prematurity (ROP)
+早起新生儿;early newborn
+粘附-集聚性大肠杆菌;enteroadherent-aggregative E.coli (EAEC)
+阵发性室上性心动过速;paroxysmal superventriular tachycardia
+正常肠道菌群;normal bacteria flora
+正常出生体重;normal birth weight (NBW)
+正常足月儿;normal term infant
+症状性泌尿道感染;symptomatic urinary tract infection
+支气管充气征;air bronchogram
+支气管肺发育不良;bronchopulmonary dysplasia (BPD)
+支气管肺炎;bronchopneumonia
+支气管哮喘;bronchial asthma
+质子泵抑制剂;proton pump inhibitors (PPI)
+致病性大肠杆菌;enteropathogenic E.coli (EPEC)
+中毒型细菌性痢疾;bacillary dysentery ,toxic type
+中枢神经系统白血病;central nervous system leukemia (CNSL)
+中枢性性早熟;central precocious puberty (CPP)
+中性温度;neutral temperature
+重症肌无力;myasthenia gravis (MG)
+转铁蛋白饱和度;transferin saturation (TS)
+紫癜性肾炎;purpura nephritis
+足月儿;full term infant
+组织胞浆菌病;histoplasmosis
+组织细胞增生症X;histiocytosis X
+</script>
+
+</body>
+</html>
